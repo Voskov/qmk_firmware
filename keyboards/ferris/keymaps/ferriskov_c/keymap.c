@@ -16,8 +16,14 @@ enum ferris_layers {
   _CONFIG
 };
 
-enum ferris_tap_dances {
+enum {
   TD_Q_ESC
+};
+
+// Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Q, twice for ESC
+    [TD_Q_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC)
 };
 
 #define KC_LGUA LGUI_T(KC_A)
@@ -43,14 +49,14 @@ enum ferris_tap_dances {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( /* QWERTY */
-      KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,           KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
+      TD(TD_Q_ESC),     KC_W,     KC_E,     KC_R,     KC_T,           KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
       KC_LGUA,  KC_LALS,  KC_LSHD,  KC_LCTF,  KC_G,           KC_H,     KC_RCTJ,  KC_RSHK,  KC_LALL,  KC_RGUS,
       KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,           KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,
                                     KC_RSTB,  KC_LWSP,        KC_LWSP,  KC_RSEN
   ),
 
   [_COLEMAC] = LAYOUT( /* COLEMAK */
-      KC_Q,     KC_W,     KC_F,     KC_P,     KC_G,           KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,
+      TD(TD_Q_ESC),     KC_W,     KC_F,     KC_P,     KC_G,           KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,
       KC_LGUA,  KC_LALR,  KC_LSHS,  KC_LCTT,  KC_D,           KC_H,     KC_RCTN,  KC_RSHE,  KC_LALI,  KC_RGUO,
       KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,           KC_K,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,
                                     KC_RSTB,  KC_LWSP,        KC_LWSP,  KC_RSEN
@@ -76,10 +82,4 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RESET,    KC_TRNS,  KC_TRNS,  DF(1),    DF(0),          KC_TRNS,  KC_WH_L,  KC_TRNS,  KC_WH_R,  RESET,
                                     KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS
   )
-};
-
-// Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for Q, twice for ESC
-    [TD_Q_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_Q, KC_ESC)
 };
